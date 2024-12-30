@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 //사용자 정보 테이블
 @Data
 @NoArgsConstructor
-@Entity(name = "Users")
+@Entity(name = "users")
 public class Users {
 
  @Id
