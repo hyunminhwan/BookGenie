@@ -14,7 +14,7 @@ public class Users {
 
  @Id
  @Column(name = "user_id")
- private Long userId; // 사용자 고유번호
+ private String userId; // 사용자 고유번호
 
  @Column(name = "user_name")
  private String userName; // 사용자 이름

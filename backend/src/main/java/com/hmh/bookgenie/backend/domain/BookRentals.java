@@ -1,7 +1,6 @@
 package com.hmh.bookgenie.backend.domain;
 
 import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -21,15 +20,15 @@ public class BookRentals {
 
 	@Id
     @Column(name = "rental_id")
-    private Long rentalId; // 대여 기록 고유 ID
+    private Long rentalId; // 대여기록 고유 번호
 
 	@ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private Users user; // 사용자 객체 참조
+    private Users user; // 사용자 객체
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Books book; // 도서 객체 참조
+    private Books book; // 도서 객체
 
     @Column(name = "borrowed_date")
     @Temporal(TemporalType.DATE)
