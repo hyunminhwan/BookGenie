@@ -1,5 +1,7 @@
 package com.hmh.bookgenie.backend.service;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,13 +22,17 @@ public class UserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+		System.out.println("유저Id " + userId); 
+		Optional<Users> userData = userRepository.findById(userId);
 		
-		Users userData = userRepository.findByUserId(userId);
 		
-		if(userData != null) {
-			return new UserDetail(userData);
-		}
-		return null;
+		 // 사용자가 없으면 예외 던지기
+        if (userData.isEmpty()) {
+            throw new UsernameNotFoundException(" userId: " + userId);
+        }
+
+        // 유효한 UserDetails 반환
+        return new UserDetail(userData.get());
 	}
 
 	

@@ -30,11 +30,11 @@ public class Books {
 	@Column(name = "book_id")
 	private Long bookId;//도서고유번호
 	
-	@Column(name = "book_content")
-	private String bookContent;//책이름
+	@Column(name = "book_name")
+	private String bookName;//책이름
 	
-	@Column(name = "book_detail")
-	private String bookDetail;//도서설명
+	@Column(name = "book_content")
+	private String bookContent;//도서설명
 	
 	@Column(name = "book_isbn")
 	private String bookIsbn;//ISBN번호
@@ -43,13 +43,8 @@ public class Books {
 	@Temporal(TemporalType.DATE)
 	private Date bookDate;//출판일
 	
-	@Column(name = "available")
-	private Boolean available;//대여 가능 여부
-	
 	@Column(name="status")
 	@Enumerated(EnumType.ORDINAL)//숫자로 DB에 저장
 	private BookStatus status; //대여가능여부
-	
-	
 	
 }
