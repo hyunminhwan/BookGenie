@@ -59,8 +59,8 @@ public class SecurityConfig {
 		
 		//권한설정
 		http.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/login","/","/book/list").permitAll()
-				.requestMatchers("/user","/logout").authenticated()
+				.requestMatchers("/login","/","/book/list","/img/**").permitAll()
+				.requestMatchers("/user").authenticated()
 				.requestMatchers("/admin").hasRole("ADMIN")
 				.anyRequest().authenticated());
 		http.addFilterBefore(new JwtHttpOnlyFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);

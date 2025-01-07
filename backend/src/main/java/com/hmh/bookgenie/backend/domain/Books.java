@@ -47,4 +47,7 @@ public class Books {
 	@Enumerated(EnumType.ORDINAL)//숫자로 DB에 저장
 	private BookStatus status; //대여가능여부
 	
+	@Column(name="img_url")
+	private String imgUrl; //이미지 경로+이름
+	
 }

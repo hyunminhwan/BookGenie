@@ -28,7 +28,7 @@ export default  function Header () {
                     console.log("요청 설정 오류:", error.message);
                 }
                 setUser(null);
-                
+
             })
     },[])
 
@@ -49,8 +49,9 @@ export default  function Header () {
     }
     return(
         <header>
+            
             <nav>
-                <Link href="/">홈</Link>
+            <h2>BOOKGENIE
                 {user?(
                    
                         <span>
@@ -62,7 +63,9 @@ export default  function Header () {
                     <Link href="/login">로그인</Link>
                     )
                 }
+                </h2>
             </nav>
+            <Link href="/">홈</Link>
             </header>
     )
 }

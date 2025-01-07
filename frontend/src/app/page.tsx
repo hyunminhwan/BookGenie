@@ -1,10 +1,12 @@
 "use client"
 import { useEffect, useState } from "react";
 import API from "./lib/api";
+import Image from "next/image";
 
 export default function Home() {
   const [list,setList]=useState<Book[]>([]);
   interface Book{
+    imgUrl: string,
     bookId: number,
     bookName: string,
     bookContent: string,
@@ -34,31 +36,23 @@ export default function Home() {
   return (
 
     <div >
-      <table>
-        <thead>
-        <tr>
-          <td>도서번호</td>
-          <td>책이름</td>
-          <td>도서설명</td>
-          <td>ISBN번호</td>
-          <td>출판일</td>
-          <td>대여가능여부</td>
-        </tr>
-        </thead>
-        <tbody>
       {
         list.map((book,i) =>(
-          <tr key={i}>
-             <td>{book.bookId}</td>
-              <td>{book.bookName}</td>
-              <td>{book.bookContent}</td>
-              <td>{book.bookIsbn}</td>
-              <td>{book.bookDate}</td>
-              <td>{book.status}</td>
-          </tr>
+          <div key={i}>
+              <div>
+                <Image src={
+                "http://localhost:8080/img/"+book.imgUrl}
+                width={400}
+                height={300} 
+                alt="book 이미지"
+                priority />
+              </div>
+              <div><span>{book.bookId}</span>  <span>좋아요</span></div>
+              <h3>{book.bookName}</h3>
+              <p>가격</p>
+              <p>평점</p>
+          </div>
         ))}
-        </tbody>
-      </table>
     </div>
 
   );
