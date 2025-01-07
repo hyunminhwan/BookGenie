@@ -11,6 +11,9 @@ import com.hmh.bookgenie.backend.dto.UserDto;
 import com.hmh.bookgenie.backend.jwt.JWTUtil;
 import com.hmh.bookgenie.backend.service.UserService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
 public class UserController {
 	
@@ -46,5 +49,18 @@ public class UserController {
 		userDto.setUserEmail(user.getUserEmail());
 		return ResponseEntity.ok(userDto);
 		
+	}
+	
+	@GetMapping("/Logout")
+	public ResponseEntity<?> logout(HttpServletResponse response){
+		// 쿠키 삭제
+	    Cookie authCookie = new Cookie("authToken", null); // 값 제거
+	    authCookie.setHttpOnly(true); // 동일한 속성 사용
+	    authCookie.setSecure(false); // HTTPS 환경에서 true로 설정
+	    authCookie.setPath("/"); // 설정된 경로와 동일해야 함
+	    authCookie.setMaxAge(0); // 쿠키 즉시 삭제
+	    response.addCookie(authCookie);
+	    
+	    return ResponseEntity.ok("로그아웃 되었습니다.");
 	}
 }

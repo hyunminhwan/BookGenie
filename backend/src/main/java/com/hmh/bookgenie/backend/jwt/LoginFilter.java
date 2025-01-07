@@ -96,7 +96,7 @@ public class LoginFilter  extends UsernamePasswordAuthenticationFilter{
         authCookie.setHttpOnly(true); // 자바스크립트 접근 차단
         authCookie.setSecure(false); // HTTPS 환경에서는 true로 설정
         authCookie.setPath("/");
-        authCookie.setMaxAge(cookieExpiry); // 10시간 유효
+        authCookie.setMaxAge(cookieExpiry); 
         response.addCookie(authCookie);
     }
 

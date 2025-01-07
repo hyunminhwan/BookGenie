@@ -3,13 +3,11 @@
 import Link from "next/link";
 import API from "../lib/api";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 
 export default function Login() {
     const [userId, setUserId] = useState<string>("");
     const [userPassword, setUserPassword] = useState<string>("");
-    const router = useRouter();
 
     const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -21,17 +19,17 @@ export default function Login() {
             });
 
             if (response.status === 200) {
-                console.log("로그인 성공:", response);
-                alert("로그인 성공!");
-                router.push("/");
+                alert("로그인 되었습니다.");
+                window.location.href = "/";
+                
             }
         } catch (error: unknown) {
             if (error instanceof AxiosError) {
                 if (error.response) {
-                    console.error("서버 응답 에러:", error.response.data);
-                    alert(`로그인 실패: ${error.response.data.message || "오류가 발생했습니다."}`);
+                    alert("아이디 또는 비밀번호가 틀렸습니다.");
+                    setUserId("");
+                    setUserPassword("");
                 } else if (error.request) {
-                    console.error("요청 문제:", error.request);
                     alert("서버와의 연결에 실패했습니다. 네트워크를 확인해주세요.");
                 }
         
@@ -46,11 +44,11 @@ export default function Login() {
         <div>
             <form onSubmit={loginSubmit}>
                 <div>
-                    아이디: <input type="text" id="userId" onChange={(e) => setUserId(e.target.value)} />
+                    아이디: <input type="text" id="userId" value={userId} onChange={(e) => setUserId(e.target.value)} />
                 </div>
                 <div>
                     비밀번호:{" "}
-                    <input type="password" id="userPassword" onChange={(e) => setUserPassword(e.target.value)} />
+                    <input type="password" id="userPassword" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
                 </div>
                 <div>
                     <button type="submit">로그인</button>
