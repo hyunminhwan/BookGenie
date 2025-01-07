@@ -60,17 +60,24 @@ public class SecurityConfig {
 		//권한설정
 		http.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/login","/","/book/list").permitAll()
+				.requestMatchers("/user").authenticated()
 				.requestMatchers("/admin").hasRole("ADMIN")
 				.anyRequest().authenticated());
+		http.addFilterBefore(new JwtHttpOnlyFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+		
 		
 		LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil);
 		loginFilter.setFilterProcessesUrl("/login"); // 명시적으로 경로 설정
 		http.addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
 		
+		
+		
 		//세션설정
 		http.sessionManagement(session -> session
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		return http.build();
+		
+		
 	}
 	
 	@Bean

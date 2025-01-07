@@ -88,13 +88,15 @@ public class LoginFilter  extends UsernamePasswordAuthenticationFilter{
         
         String userRole = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(userId, userRole, 60*60*2L);
+        long jwtExpiry = 2*60*60*1000L; //밀리초
+        String token = jwtUtil.createJwt(userId, userRole, jwtExpiry);
 
+        int cookieExpiry = (int) (jwtExpiry / 1000); //초단위
         Cookie authCookie = new Cookie("authToken", token);
         authCookie.setHttpOnly(true); // 자바스크립트 접근 차단
         authCookie.setSecure(false); // HTTPS 환경에서는 true로 설정
         authCookie.setPath("/");
-        authCookie.setMaxAge(60 * 60 * 10); // 10시간 유효
+        authCookie.setMaxAge(cookieExpiry); // 10시간 유효
         response.addCookie(authCookie);
     }
 

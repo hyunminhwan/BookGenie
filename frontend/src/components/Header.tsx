@@ -14,13 +14,18 @@ export default  function Header () {
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(()=>{
-       API.get("/api/user")
+       API.get("/user")
        .then((response)=>{
         console.log(response.data);
         setUser(response.data);
        })
        .catch((error)=>{
         console.log("정보를가져오는데 실패 했습니다.",error);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+                console.log("JWT가 만료되었습니다. 로그아웃 처리.");
+                document.cookie = "authToken=; Max-Age=0; path=/"; // 클라이언트에서 쿠키 삭제
+                setUser(null);
+            }
        })
     },[])
 
