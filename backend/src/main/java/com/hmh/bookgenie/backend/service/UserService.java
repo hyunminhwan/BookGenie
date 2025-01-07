@@ -35,5 +35,13 @@ public class UserService implements UserDetailsService{
         return new UserDetail(userData.get());
 	}
 
+	public Users getUser(String userId) {
+		Optional<Users> user=userRepository.findById(userId);
+		if(user.isPresent()) {
+			return user.get();
+		}
+		return null;
+	}
+
 	
 }

@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hmh.bookgenie.backend.dto.UserDetail;
 
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -69,6 +70,7 @@ public class LoginFilter  extends UsernamePasswordAuthenticationFilter{
 		    }
 
 		    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password, null);
+		    
 		    return authenticationManager.authenticate(authToken);
 	}
 	
@@ -86,9 +88,14 @@ public class LoginFilter  extends UsernamePasswordAuthenticationFilter{
         
         String userRole = auth.getAuthority();
 
-        String token = jwtUtil.createJwt(userId, userRole, 60*60*10L);
+        String token = jwtUtil.createJwt(userId, userRole, 60*60*2L);
 
-        response.addHeader("Authorization", "Bearer " + token);
+        Cookie authCookie = new Cookie("authToken", token);
+        authCookie.setHttpOnly(true); // 자바스크립트 접근 차단
+        authCookie.setSecure(false); // HTTPS 환경에서는 true로 설정
+        authCookie.setPath("/");
+        authCookie.setMaxAge(60 * 60 * 10); // 10시간 유효
+        response.addCookie(authCookie);
     }
 
 	//로그인 실패시 실행하는 메소드

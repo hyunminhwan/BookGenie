@@ -23,9 +23,6 @@ export default function Login() {
             if (response.status === 200) {
                 console.log("로그인 성공:", response);
                 alert("로그인 성공!");
-                const tokenFull = response.headers["authorization"];
-                const token = tokenFull.replace("Bearer ", "");
-                localStorage.setItem("token", token);
                 router.push("/");
             }
         } catch (error: unknown) {
@@ -59,7 +56,7 @@ export default function Login() {
                     <button type="submit">로그인</button>
                 </div>
                 <div>
-                    <Link href={"/signUp"}>회원가입</Link>
+                    <button><Link href={"/signUp"}>회원가입</Link></button>
                 </div>
             </form>
         </div>
