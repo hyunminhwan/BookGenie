@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.controller;
+package com.hmh.moviegenie.backend.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hmh.bookgenie.backend.domain.Users;
-import com.hmh.bookgenie.backend.dto.UserDto;
-import com.hmh.bookgenie.backend.jwt.JWTUtil;
-import com.hmh.bookgenie.backend.service.UserService;
+import com.hmh.moviegenie.backend.domain.Users;
+import com.hmh.moviegenie.backend.dto.UserDto;
+import com.hmh.moviegenie.backend.jwt.JWTUtil;
+import com.hmh.moviegenie.backend.service.UserService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

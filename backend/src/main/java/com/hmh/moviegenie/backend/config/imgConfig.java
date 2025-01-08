@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.config;
+package com.hmh.moviegenie.backend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -10,7 +10,7 @@ public class imgConfig implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/img/**")
-		.addResourceLocations("file:/book/");
+		.addResourceLocations("file:/movie/");
 	
 	}
 	

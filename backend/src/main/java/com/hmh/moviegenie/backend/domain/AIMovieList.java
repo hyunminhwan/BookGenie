@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.domain;
+package com.hmh.moviegenie.backend.domain;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;
@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "ai_book_list") // 테이블 이름도 변경
-public class AIBookList {
+@Entity(name = "ai_movie_list")
+public class AIMovieList {
 
     @Id
     @SequenceGenerator(
-        name = "ai_book_list_seq",
-        sequenceName = "ai_book_list_id_seq",
+        name = "ai_movie_list_seq",
+        sequenceName = "ai_movie_list_id_seq",
         allocationSize = 1
     )
-    @GeneratedValue(generator = "ai_book_list_seq")
+    @GeneratedValue(generator = "ai_movie_list_seq")
     @Column(name = "list_id")
     private Long listId; //ai 추천 고유번호
 
@@ -31,12 +31,12 @@ public class AIBookList {
     private Users user; // 사용자 객체 
 
     @ManyToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Books book; // 도서 객체 
+    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+    private movies movie; // 영화 객체 
 
-    @Column(name = "ai_content")
-    private String aiContent; // 추천 이유
-
-    @Column(name = "created_date")
-    private LocalDateTime createdDate; // 추천 생성 시간
+    @Column(nullable = false)
+    private Float score; // 추천 점수 (AI 알고리즘이 계산한 값)
+    
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now(); // 생성 시간
 }

@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.config;
+package com.hmh.moviegenie.backend.config;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.hmh.bookgenie.backend.jwt.JWTUtil;
-import com.hmh.bookgenie.backend.jwt.JwtHttpOnlyFilter;
-import com.hmh.bookgenie.backend.jwt.LoginFilter;
+import com.hmh.moviegenie.backend.jwt.JWTUtil;
+import com.hmh.moviegenie.backend.jwt.JwtHttpOnlyFilter;
+import com.hmh.moviegenie.backend.jwt.LoginFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -59,7 +59,7 @@ public class SecurityConfig {
 		
 		//권한설정
 		http.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/login","/","/book/list","/img/**").permitAll()
+				.requestMatchers("/login","/","/movie/list","/img/**").permitAll()
 				.requestMatchers("/user").authenticated()
 				.requestMatchers("/admin").hasRole("ADMIN")
 				.anyRequest().authenticated());

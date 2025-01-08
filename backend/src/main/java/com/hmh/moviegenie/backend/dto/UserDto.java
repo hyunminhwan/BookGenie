@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.dto;
+package com.hmh.moviegenie.backend.dto;
 
 import lombok.Data;
 

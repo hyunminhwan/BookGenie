@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.service;
+package com.hmh.moviegenie.backend.service;
 
 import java.util.Optional;
 
@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hmh.bookgenie.backend.domain.Users;
-import com.hmh.bookgenie.backend.dto.UserDetail;
-import com.hmh.bookgenie.backend.repository.UserRepository;
+import com.hmh.moviegenie.backend.domain.Users;
+import com.hmh.moviegenie.backend.dto.UserDetail;
+import com.hmh.moviegenie.backend.repository.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService{

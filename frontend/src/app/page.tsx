@@ -4,24 +4,21 @@ import API from "./lib/api";
 import Image from "next/image";
 
 export default function Home() {
-  const [list,setList]=useState<Book[]>([]);
-  interface Book{
+  const [list,setList]=useState<Movie[]>([]);
+  interface Movie{
     imgUrl: string,
-    bookId: number,
-    bookName: string,
-    bookContent: string,
-    bookIsbn: string,
-    bookDate: string,
-    status: BookStatus;
+    movieId: number,
+    movieName: string,
+    movieContent: string,
+    releaseDate: string,
+    director: string,
+    ottLink: string,
+    createdAt: string
   }
   
-   enum BookStatus{
-    대여중="대여중",
-    이용가능="이용가능",
-    예약됨="예약됨"
-  }
+  
   useEffect(()=>{
-    API.get<Book[]>("/book/list")
+    API.get<Movie[]>("/movie/list")
     .then(response=>{
       console.log(response.data)
       if(response.data.length===0){
@@ -37,18 +34,18 @@ export default function Home() {
 
     <div >
       {
-        list.map((book,i) =>(
+        list.map((movie,i) =>(
           <div key={i}>
               <div>
                 <Image src={
-                "http://localhost:8080/img/"+book.imgUrl}
+                "http://localhost:8080/img/"+movie.imgUrl}
                 width={400}
                 height={300} 
                 alt="book 이미지"
                 priority />
               </div>
-              <div><span>{book.bookId}</span>  <span>좋아요</span></div>
-              <h3>{book.bookName}</h3>
+              <div><span>{movie.movieName}</span>  <span>좋아요</span></div>
+              <h3>{movie.movieContent}</h3>
               <p>가격</p>
               <p>평점</p>
           </div>

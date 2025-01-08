@@ -51,7 +51,7 @@ export default  function Header () {
         <header>
             
             <nav>
-            <h2>BOOKGENIE
+            <h2>Movie Genie
                 {user?(
                    
                         <span>

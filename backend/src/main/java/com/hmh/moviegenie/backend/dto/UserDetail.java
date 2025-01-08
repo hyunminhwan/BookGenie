@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.dto;
+package com.hmh.moviegenie.backend.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.hmh.bookgenie.backend.domain.Users;
+import com.hmh.moviegenie.backend.domain.Users;
 
 public class UserDetail implements UserDetails{
 

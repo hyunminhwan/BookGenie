@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.jwt;
+package com.hmh.moviegenie.backend.jwt;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +28,7 @@ public class JwtHttpOnlyFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        String token = bookCookie(request);
+        String token = movieCookie(request);
 
         if (token != null) {
             try {
@@ -60,7 +60,7 @@ public class JwtHttpOnlyFilter extends OncePerRequestFilter {
     /**
      * 쿠키에서 "authToken" 값 추출
      */
-    private String bookCookie(HttpServletRequest request) {
+    private String movieCookie(HttpServletRequest request) {
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("authToken".equals(cookie.getName())) {

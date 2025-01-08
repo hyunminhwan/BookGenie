@@ -1,5 +1,6 @@
-package com.hmh.bookgenie.backend.domain;
+package com.hmh.moviegenie.backend.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,8 +30,8 @@ public class Reviews {
     private Long reviewId; // 리뷰 고유 ID
 
 	@ManyToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Books book; // 도서 객체 참조
+    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+    private movies movie; // 도서 객체 참조
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
@@ -42,8 +43,7 @@ public class Reviews {
     @Column(name = "rating")
     private Integer rating; // 평점 (1~5)
 
-    @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate; // 작성 시간
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now(); // 생성 시간
     
 }

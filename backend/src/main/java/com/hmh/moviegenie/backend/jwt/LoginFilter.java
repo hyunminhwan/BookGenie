@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.jwt;
+package com.hmh.moviegenie.backend.jwt;
 
 
 import java.io.BufferedReader;
@@ -15,7 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hmh.bookgenie.backend.dto.UserDetail;
+import com.hmh.moviegenie.backend.dto.UserDetail;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.Cookie;

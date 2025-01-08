@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.domain;
+package com.hmh.moviegenie.backend.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +30,6 @@ public class Likes {
     private Users user; //사용자 객체
 
     @ManyToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Books book; //도서 객체
+    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
+    private movies movie; //도서 객체
 }

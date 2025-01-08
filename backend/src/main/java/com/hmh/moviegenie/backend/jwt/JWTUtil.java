@@ -1,4 +1,4 @@
-package com.hmh.bookgenie.backend.jwt;
+package com.hmh.moviegenie.backend.jwt;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
