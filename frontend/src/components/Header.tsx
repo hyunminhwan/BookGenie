@@ -53,11 +53,15 @@ export default  function Header () {
             <nav>
             <h2>Movie Genie
                 {user?(
-                   
-                        <span>
-                            {user.userId} ({user.userName})
-                            <button type="button" onClick={logOut}>로그아웃</button>
-                        </span>
+                         <div>
+                            <span>
+                                {user.userId} ({user.userName})
+                                <button type="button" onClick={logOut}>로그아웃</button>
+                            </span>
+                            <span>
+                                <Link href="/login/insert">등록페이지</Link>
+                            </span>
+                        </div>
  
                     ):(
                     <Link href="/login">로그인</Link>

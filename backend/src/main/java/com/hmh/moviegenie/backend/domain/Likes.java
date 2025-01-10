@@ -31,5 +31,5 @@ public class Likes {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
-    private movies movie; //도서 객체
+    private Movies movie; //도서 객체
 }

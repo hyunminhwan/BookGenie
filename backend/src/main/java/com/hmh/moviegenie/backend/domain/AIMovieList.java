@@ -1,6 +1,8 @@
 package com.hmh.moviegenie.backend.domain;
 
 import java.time.LocalDateTime;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +34,7 @@ public class AIMovieList {
 
     @ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
-    private movies movie; // 영화 객체 
+    private Movies movie; // 영화 객체 
 
     @Column(nullable = false)
     private Float score; // 추천 점수 (AI 알고리즘이 계산한 값)

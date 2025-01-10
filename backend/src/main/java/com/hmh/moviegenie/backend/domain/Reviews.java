@@ -1,7 +1,8 @@
 package com.hmh.moviegenie.backend.domain;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,7 +30,7 @@ public class Reviews {
 
 	@ManyToOne
     @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
-    private movies movie; // 도서 객체 참조
+    private Movies movie; // 도서 객체 참조
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")

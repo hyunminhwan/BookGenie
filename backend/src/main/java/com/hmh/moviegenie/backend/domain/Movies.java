@@ -3,6 +3,8 @@ package com.hmh.moviegenie.backend.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity(name = "movies")
-public class movies {
+public class Movies {
 	
 	@Id
 	@SequenceGenerator(	
@@ -33,6 +35,7 @@ public class movies {
 	@Column(name = "movie_content")
 	private String movieContent;//설명
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "release_date")
 	private LocalDate releaseDate; //개봉일
 	
@@ -41,6 +44,15 @@ public class movies {
 	
 	@Column(name = "ott_link")
     private String ottLink; // OTT 플랫폼으로 이동할 수 있는 링크
+	
+	@Column(name = "ott_name")
+    private String ottName;
+	
+	@Column(name="genre") 
+	private String genre;
+	
+	@Column(name="movietype")
+	private String movieType;
 	
 	@Column(name="img_url")
 	private String imgUrl; //이미지 경로+이름
