@@ -1,23 +1,25 @@
 "use client";
 
 import API from "@/app/lib/api";
+import { clearUser, setUser } from "@/slices/userSlice";
+import { RootState } from "@/store";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default  function Header () {
-    interface User {
-        userId: string;
-        userName: string;
-        userEmail: string;
-    }
 
-    const [user, setUser] = useState<User | null>(null);
+    const dispatch = useDispatch();
+
+    // Redux의 user 상태 가져오기
+    const user = useSelector((state:RootState)=>state.user.user);
+
 
     useEffect(()=>{
             API.get("/user")
             .then((response)=>{
              console.log(response.data);
-             setUser(response.data);
+             dispatch(setUser(response.data));
             })
             .catch((error)=>{
              if (error.response.status === 401 || error.response.status === 403) {
@@ -27,17 +29,17 @@ export default  function Header () {
                 } else {
                     console.log("요청 설정 오류:", error.message);
                 }
-                setUser(null);
+                dispatch(clearUser());
 
             })
-    },[])
+    },[dispatch])
 
     const logOut = ()=>{
         API.get("/Logout")
         .then((response)=>{
             alert(`${response.data}`)
              // 사용자 상태 초기화
-        setUser(null);
+             dispatch(clearUser());
         // 로그인 페이지로 리다이렉트
         window.location.href = "/login";
         })

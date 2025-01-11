@@ -1,5 +1,8 @@
 import Image from "next/image";
 import API from "../lib/api";
+import { format } from "date-fns";
+import Like from "@/components/Like";
+
 
 
 interface Movie {
@@ -12,9 +15,11 @@ interface Movie {
   ottLink: string;
   ottName: string;
   genre: string;
-  movieType: string;
   createdAt: string;
 }
+
+
+
 //[id] 의값
 interface Props {
     params: {
@@ -24,6 +29,7 @@ interface Props {
 
 // 서버에서 데이터를 가져오는 함수
 async function getMovieData(id: number): Promise<Movie | null> {
+  
   try {
     const response = await API.get(`/movie/detail/${id}`);
     return response.data; // API에서 받은 데이터 반환
@@ -36,13 +42,14 @@ async function getMovieData(id: number): Promise<Movie | null> {
 
 
 export default async function MovieDetail({ params }: Props) {
-    const { id } =  params;
+    const  id  =  params.id;
     const movie = await getMovieData(Number(id));
 
   if (!movie) {
     return <p>Movie not found</p>;
   }
 
+  
   return (
     <div >
       <Image
@@ -53,28 +60,25 @@ export default async function MovieDetail({ params }: Props) {
         priority
         style={{ borderRadius: "10px" }}
       />
-      <h1 >{movie.movieName}</h1>
+      <h1 >{movie.movieName}</h1><Like movieId={movie.movieId} />
       <p >{movie.movieContent}</p>
       <p>
-        <strong>Release Date:</strong> {new Date(movie.releaseDate).toLocaleDateString()}
+        <strong>개봉일:</strong> {format(new Date(movie.releaseDate), "yyyy-MM-dd")}
       </p>
       <p>
-        <strong>Director:</strong> {movie.director}
+        <strong>감독:</strong> {movie.director}
       </p>
       <p>
-        <strong>Genre:</strong> {movie.genre}
+        <strong>장르:</strong> {movie.genre}
       </p>
       <p>
-        <strong>Type:</strong> {movie.movieType}
-      </p>
-      <p>
-        <strong>OTT Platform:</strong>{" "}
+        <strong>OTT:</strong>{" "}
         <a href={movie.ottLink} target="_blank" rel="noopener noreferrer">
           {movie.ottName}
         </a>
       </p>
       <p>
-        <strong>Created At:</strong> {new Date(movie.createdAt).toLocaleDateString()}
+        <strong>등록일 :</strong> {format(new Date(movie.releaseDate), "yyyy-MM-dd")}
       </p>
     </div>
   );

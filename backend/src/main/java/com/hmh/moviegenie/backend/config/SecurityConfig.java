@@ -60,6 +60,8 @@ public class SecurityConfig {
 		//권한설정
 		http.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/login","/","/movie/list","/img/**","/movie/detail/**").permitAll()
+				.requestMatchers("/likes/get").permitAll()
+				.requestMatchers("/likes/post", "/likes/delete").authenticated()
 				.requestMatchers("/user").authenticated()
 				.requestMatchers("/movie/insert").authenticated()
 				.anyRequest().authenticated());
