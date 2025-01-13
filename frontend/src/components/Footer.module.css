@@ -1,0 +1,42 @@
+.footer {
+    background-color: #333; /* 배경색 */
+    color: #fff; /* 텍스트 색상 */
+    padding: 20px 0; /* 위아래 패딩 */
+    text-align: center;
+  }
+  
+  .footerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* 최대 너비 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 0 20px;
+    flex-wrap: wrap; /* 작은 화면에서 줄바꿈 */
+  }
+  
+  .footerInfo {
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .footerLinks {
+    text-align: right;
+    font-size: 14px;
+  }
+  
+  .footerInfo p,
+  .footerLinks p {
+    margin: 5px 0; /* 간격 설정 */
+  }
+  
+  .link {
+    color: #61dafb; /* 링크 색상 */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link:hover {
+    text-decoration: underline; /* 호버 효과 */
+  }
+  

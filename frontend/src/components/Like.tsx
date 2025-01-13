@@ -5,17 +5,14 @@ import { RootState } from "@/store";
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 
-interface Likes {
-  movieId: number;
-}
-
-export default function Like ({movieId}:Likes) {
+export default function Like ({movieId}:{movieId:number}) {
    const [like,setlike]=useState<boolean>(false);
    const [loading,setLoading]=useState<boolean>(true);
-    //리덕스 선언
+
+    //Redux user 가져오기
    const user = useSelector((state: RootState) => state.user.user);
    const userId =user?.userId
-   
+
 useEffect(()=> {
     const likeStatus = async ()=>{
         if(userId != null){

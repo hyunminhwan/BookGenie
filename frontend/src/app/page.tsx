@@ -1,62 +1,62 @@
-"use client"
-
-import { useEffect, useState } from "react";
 import API from "./lib/api";
 import Image from "next/image";
 import Link from "next/link";
 import Like from "@/components/Like";
+import Rating from "@/components/Raring";
+import styles from "./page.module.css";
 
-export default function Home() {
+interface Movie {
+  imgUrl: string;
+  movieId: number;
+  movieName: string;
+  director: string;
+  ottLink: string;
+  ottName: string;
+  rating: number;
+}
 
-  const [list,setList]=useState<Movie[]>([]);
-  interface Movie{
-    imgUrl: string,
-    movieId: number,
-    movieName: string,
-    director: string,
-    ottLink: string,
-    ottName: string,
+async function getMovies(): Promise<Movie[]> {
+  try {
+    const response = await API.get<Movie[]>("/movie/list");
+    return response.data;
+  } catch (error) {
+    console.error("데이터 가져오기 실패", error);
+    return [];
   }
-  
-  
-  useEffect(()=>{
-    API.get<Movie[]>("/movie/list")
-    .then(response=>{
-      console.log(response.data)
-      if(response.data.length===0){
-        console.warn("데이터가 없습니다.");
-      }
-      setList(response.data)})
-    .catch(error=>{
-      console.log(error,"에러남")
-    })
-  },[])
+}
+
+export default async function Home() {
+  const list = await getMovies();
 
   return (
-
-    <div >
-      {
-        list.map((movie,i) =>(
-        <div key={i}>
-          <Link href={`/${movie.movieId}`} >
-            
-                <div>
-                  <Image src={
-                  "http://localhost:8080/img/"+movie.imgUrl}
+    <div className={styles.movieGridContainer}>
+      <div className={styles.movieGrid}>
+        {list.map((movie) => (
+          <div key={movie.movieId} className={styles.movieCard}>
+            <Link href={`/${movie.movieId}`}>
+              <div>
+                <Image
+                  src={`http://localhost:8080/img/${movie.imgUrl}`}
                   width={400}
-                  height={300} 
-                  alt="book 이미지"
-                  priority />
-                </div>
-                
-            
-          </Link>
-          <h3>{movie.movieName}</h3>  <Like movieId={movie.movieId}/>
-          <p><a href={`${movie.ottLink}`} target="_blank">{movie.ottName}</a></p>
-          <p>평점</p>
+                  height={300}
+                  alt={`${movie.movieName} 이미지`}
+                  priority
+                />
+              </div>
+            </Link>
+            <div className={styles.titleRow}>
+              <h3>{movie.movieName}</h3>
+              <Like movieId={movie.movieId} />
+            </div>
+            <p>
+              <a href={movie.ottLink} target="_blank" rel="noopener noreferrer">
+                {movie.ottName}
+              </a>
+            </p>
+            <Rating rating={movie.rating} />
           </div>
         ))}
+      </div>
     </div>
-
   );
 }

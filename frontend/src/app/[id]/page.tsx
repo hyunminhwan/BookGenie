@@ -2,6 +2,7 @@ import Image from "next/image";
 import API from "../lib/api";
 import { format } from "date-fns";
 import Like from "@/components/Like";
+import Reviews from "@/components/Reviews";
 
 
 
@@ -42,7 +43,7 @@ async function getMovieData(id: number): Promise<Movie | null> {
 
 
 export default async function MovieDetail({ params }: Props) {
-    const  id  =  params.id;
+    const  id  = params.id;
     const movie = await getMovieData(Number(id));
 
   if (!movie) {
@@ -80,6 +81,8 @@ export default async function MovieDetail({ params }: Props) {
       <p>
         <strong>등록일 :</strong> {format(new Date(movie.releaseDate), "yyyy-MM-dd")}
       </p>
+      <h2>리뷰</h2>
+      <Reviews movieId={movie.movieId}/>
     </div>
   );
 }
