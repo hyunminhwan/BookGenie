@@ -1,5 +1,7 @@
 package com.hmh.moviegenie.backend.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.hmh.moviegenie.backend.domain.Likes;
@@ -30,6 +32,14 @@ public class LikesService {
 	public void likeDelete(String userId, Long movieId) {
 		likesRepository.deleteByUser_UserIdAndMovie_MovieId(userId,movieId);
 		
+	}
+
+	public List<Likes> getList(String userId) {
+		List<Likes> list=likesRepository.findAllByUser_UserId(userId);
+		if(!list.isEmpty()) {
+			return list;
+		}
+		return null;
 	}
 
 	

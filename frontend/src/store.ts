@@ -8,4 +8,4 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+// export type AppDispatch = typeof store.dispatch; 비동기 사용시 필요

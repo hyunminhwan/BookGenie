@@ -32,6 +32,7 @@ export default function Header() {
   }, [dispatch]);
 
   const logOut = () => {
+    
     API.get("/Logout")
       .then((response) => {
         alert(`${response.data}`);
@@ -65,6 +66,7 @@ export default function Header() {
               <Link href="/login/insert" className={styles.registerLink}>
                 등록페이지
               </Link>
+              <Link href="/profile">마이페이지</Link>
             </>
           ) : (
             <Link href="/login" className={styles.loginLink}>

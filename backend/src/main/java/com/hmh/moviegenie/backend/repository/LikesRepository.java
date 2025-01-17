@@ -1,5 +1,7 @@
 package com.hmh.moviegenie.backend.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,9 @@ public interface LikesRepository extends JpaRepository<Likes, Long>{
 
 	@Transactional
 	void deleteByUser_UserIdAndMovie_MovieId(String userId, Long movieId);
+
+
+	List<Likes> findAllByUser_UserId(String userId);
 
 
 }

@@ -1,14 +1,21 @@
 package com.hmh.moviegenie.backend.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hmh.moviegenie.backend.domain.Likes;
+import com.hmh.moviegenie.backend.domain.Movies;
 import com.hmh.moviegenie.backend.domain.Users;
 import com.hmh.moviegenie.backend.dto.UserDto;
 import com.hmh.moviegenie.backend.jwt.JWTUtil;
+import com.hmh.moviegenie.backend.service.LikesService;
 import com.hmh.moviegenie.backend.service.UserService;
 
 import jakarta.servlet.http.Cookie;
@@ -19,12 +26,15 @@ public class UserController {
 	
 	private final UserService userService;
 	private final JWTUtil jwtUtil;
+	private final LikesService likeService;
 	
-	public UserController(UserService userService,JWTUtil jwtUtil) {
+	public UserController(UserService userService,JWTUtil jwtUtil,LikesService likeService) {
 		this.userService = userService;
 		this.jwtUtil = jwtUtil;
+		this.likeService = likeService;
 	}
 	
+	//유저 정보 가져오기
 	@GetMapping("/user")
 	public ResponseEntity<?> getUser(@CookieValue("authToken") String token){
 		System.out.println(token);
@@ -51,6 +61,7 @@ public class UserController {
 		
 	}
 	
+	//로그아웃
 	@GetMapping("/Logout")
 	public ResponseEntity<?> logout(HttpServletResponse response){
 		// 쿠키 삭제
@@ -62,5 +73,16 @@ public class UserController {
 	    response.addCookie(authCookie);
 	    
 	    return ResponseEntity.ok("로그아웃 되었습니다.");
+	}
+	
+	//좋아요 리스트
+	@GetMapping("/myList")
+	public ResponseEntity<List<Movies>> myList(@RequestParam(name="userId") String userId){
+		List<Likes> likeList = likeService.getList(userId);
+		List<Movies> movieList = new ArrayList<>();
+		for(Likes like : likeList) {
+			movieList.add(like.getMovie());
+		}
+		return ResponseEntity.ok(movieList);
 	}
 }
